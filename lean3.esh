@@ -1,0 +1,21 @@
+#!/usr/bin/env escript
+
+main(_) ->
+	FileHandle = write_open("output.txt"),
+	write_close(FileHandle).	
+
+
+
+write_close(FHandle) ->
+	file:close(FHandle).
+
+write_open(File) ->
+	try file:open(File,[append]) of
+		{ok,W} ->
+			W;
+		{error,E} ->
+			error("file open error~n")
+	catch 
+		_ ->	error("exception~n")
+	end.
+
